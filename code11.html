@@ -1,0 +1,1099 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clean India Green India</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2e7d32;
+            --secondary-color: #66bb6a;
+            --accent-color: #4caf50;
+            --light-color: #e8f5e9;
+            --dark-color: #1b5e20;
+            --text-color: #333;
+            --error-color: #f44336;
+            --success-color: #4caf50;
+            --warning-color: #ff9800;
+            --info-color: #2196f3;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Login Page Styles */
+        .login-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, var(--light-color) 0%, var(--secondary-color) 100%);
+        }
+
+        .login-form {
+            background-color: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 450px;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .login-header h1 {
+            color: var(--primary-color);
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .login-header p {
+            color: #666;
+            font-size: 16px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--text-color);
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus {
+            border-color: var(--accent-color);
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2);
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            text-align: center;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        .btn:hover {
+            background-color: var(--dark-color);
+            transform: translateY(-2px);
+        }
+
+        .btn-block {
+            display: block;
+            width: 100%;
+        }
+
+        .error-message {
+            color: var(--error-color);
+            font-size: 14px;
+            margin-top: 5px;
+            display: none;
+        }
+
+        /* Dashboard Styles */
+        .dashboard {
+            display: none;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        .dashboard-header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        .dashboard-header h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .dashboard-header p {
+            font-size: 18px;
+            opacity: 0.9;
+        }
+
+        .logout-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 1px solid white;
+        }
+
+        .logout-btn:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .dashboard-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .dashboard-card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+
+        .dashboard-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .card-icon {
+            background-color: var(--light-color);
+            color: var(--primary-color);
+            padding: 30px;
+            text-align: center;
+            font-size: 40px;
+        }
+
+        .card-content {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .card-content h3 {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+
+        .card-content p {
+            color: #666;
+            font-size: 14px;
+        }
+
+        /* Points Display */
+        .points-display {
+            background-color: var(--accent-color);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+            margin-top: 10px;
+            display: inline-block;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 600px;
+            max-height: 90vh;
+            overflow-y: auto;
+            animation: slideIn 0.3s ease-out;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .modal-header h2 {
+            color: var(--primary-color);
+            font-size: 24px;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #999;
+            transition: color 0.3s;
+        }
+
+        .close-btn:hover {
+            color: var(--error-color);
+        }
+
+        /* Task List Styles */
+        .task-list {
+            list-style-type: none;
+        }
+
+        .task-item {
+            background-color: var(--light-color);
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            transition: background-color 0.3s;
+        }
+
+        .task-item:hover {
+            background-color: #c8e6c9;
+        }
+
+        .task-item i {
+            color: var(--primary-color);
+            margin-right: 15px;
+            font-size: 20px;
+        }
+
+        .task-points {
+            margin-left: auto;
+            background-color: var(--accent-color);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        /* Upload Form Styles */
+        .upload-area {
+            border: 2px dashed var(--secondary-color);
+            border-radius: 10px;
+            padding: 40px;
+            text-align: center;
+            margin-bottom: 20px;
+            transition: background-color 0.3s;
+            cursor: pointer;
+        }
+
+        .upload-area:hover {
+            background-color: var(--light-color);
+        }
+
+        .upload-area i {
+            font-size: 48px;
+            color: var(--secondary-color);
+            margin-bottom: 15px;
+        }
+
+        .file-input {
+            display: none;
+        }
+
+        /* Plastic Form Styles */
+        .plastic-form .form-group {
+            margin-bottom: 25px;
+        }
+
+        .plastic-form input[type="number"] {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        .plastic-form input[type="number"]:focus {
+            border-color: var(--accent-color);
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2);
+        }
+
+        /* Notification Styles */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 20px;
+            border-radius: 5px;
+            color: white;
+            font-weight: 600;
+            z-index: 2000;
+            transform: translateX(150%);
+            transition: transform 0.3s ease-out;
+        }
+
+        .notification.show {
+            transform: translateX(0);
+        }
+
+        .notification.success {
+            background-color: var(--success-color);
+        }
+
+        .notification.error {
+            background-color: var(--error-color);
+        }
+
+        .notification.points {
+            background-color: var(--warning-color);
+        }
+
+        /* Leaderboard Styles */
+        .leaderboard {
+            margin-top: 20px;
+        }
+
+        .leaderboard-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        .leaderboard-table th,
+        .leaderboard-table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        .leaderboard-table th {
+            background-color: var(--light-color);
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        .leaderboard-table tr:hover {
+            background-color: #f9f9f9;
+        }
+
+        .rank {
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        .rank.first {
+            color: gold;
+        }
+
+        .rank.second {
+            color: silver;
+        }
+
+        .rank.third {
+            color: #cd7f32;
+        }
+
+        .points-badge {
+            background-color: var(--accent-color);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-weight: bold;
+            display: inline-block;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideIn {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .pulse {
+            animation: pulse 0.5s ease-in-out;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .dashboard-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .modal-content {
+                width: 95%;
+                padding: 20px;
+            }
+            
+            .leaderboard-table {
+                font-size: 14px;
+            }
+            
+            .leaderboard-table th,
+            .leaderboard-table td {
+                padding: 8px 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Login Page -->
+    <div id="loginPage" class="login-container">
+        <div class="login-form">
+            <div class="login-header">
+                <h1><i class="fas fa-leaf"></i> Clean India Green India</h1>
+                <p>School Portal Login</p>
+            </div>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="schoolName">School Name</label>
+                    <input type="text" id="schoolName" name="schoolName" required>
+                    <div class="error-message" id="schoolNameError">Please enter your school name</div>
+                </div>
+                <div class="form-group">
+                    <label for="email">Gmail</label>
+                    <input type="email" id="email" name="email" required>
+                    <div class="error-message" id="emailError">Please enter a valid Gmail address</div>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required>
+                    <div class="error-message" id="passwordError">Password must be at least 6 characters</div>
+                </div>
+                <button type="submit" class="btn btn-block">Login</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Dashboard -->
+    <div id="dashboard" class="dashboard">
+        <div class="dashboard-header">
+            <h1>Clean India Green India</h1>
+            <p>Making India cleaner and greener, one school at a time</p>
+            <button class="btn logout-btn" id="logoutBtn">Logout</button>
+        </div>
+        
+        <div class="container">
+            <div class="dashboard-content">
+                <!-- Daily Tasks Card -->
+                <div class="dashboard-card" id="dailyTasksCard">
+                    <div class="card-icon">
+                        <i class="fas fa-tasks"></i>
+                    </div>
+                    <div class="card-content">
+                        <h3>Daily Tasks</h3>
+                        <p>View and manage daily cleaning activities</p>
+                    </div>
+                </div>
+
+                <!-- Upload Media Card -->
+                <div class="dashboard-card" id="uploadMediaCard">
+                    <div class="card-icon">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                    </div>
+                    <div class="card-content">
+                        <h3>Upload Pictures & Videos</h3>
+                        <p>Share your cleaning activities and earn points</p>
+                        <div class="points-display" id="userPoints">0 Points</div>
+                    </div>
+                </div>
+
+                <!-- Plastic Management Card -->
+                <div class="dashboard-card" id="plasticManagementCard">
+                    <div class="card-icon">
+                        <i class="fas fa-recycle"></i>
+                    </div>
+                    <div class="card-content">
+                        <h3>Plastic Management</h3>
+                        <p>Track and report plastic waste</p>
+                    </div>
+                </div>
+
+                <!-- Reports Card -->
+                <div class="dashboard-card" id="reportsCard">
+                    <div class="card-icon">
+                        <i class="fas fa-chart-bar"></i>
+                    </div>
+                    <div class="card-content">
+                        <h3>Reports</h3>
+                        <p>View progress and statistics</p>
+                    </div>
+                </div>
+
+                <!-- Leaderboard Card -->
+                <div class="dashboard-card" id="leaderboardCard">
+                    <div class="card-icon">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <div class="card-content">
+                        <h3>Leaderboard</h3>
+                        <p>See top performing schools</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Daily Tasks Modal -->
+    <div id="dailyTasksModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Daily Tasks</h2>
+                <button class="close-btn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <ul class="task-list">
+                    <li class="task-item">
+                        <i class="fas fa-broom"></i>
+                        <span>Students will clean the school premises</span>
+                        <span class="task-points">10 pts</span>
+                    </li>
+                    <li class="task-item">
+                        <i class="fas fa-users"></i>
+                        <span>School conducting cleanliness rally in the neighborhood</span>
+                        <span class="task-points">20 pts</span>
+                    </li>
+                    <li class="task-item">
+                        <i class="fas fa-seedling"></i>
+                        <span>Planting trees in the school campus</span>
+                        <span class="task-points">15 pts</span>
+                    </li>
+                    <li class="task-item">
+                        <i class="fas fa-trash-alt"></i>
+                        <span>Segregation of waste into biodegradable and non-biodegradable</span>
+                        <span class="task-points">10 pts</span>
+                    </li>
+                    <li class="task-item">
+                        <i class="fas fa-chalkboard-teacher"></i>
+                        <span>Awareness session on environmental conservation</span>
+                        <span class="task-points">15 pts</span>
+                    </li>
+                    <li class="task-item">
+                        <i class="fas fa-hand-holding-water"></i>
+                        <span>Water conservation activities</span>
+                        <span class="task-points">10 pts</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Upload Media Modal -->
+    <div id="uploadMediaModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Upload Pictures & Videos</h2>
+                <button class="close-btn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="upload-area" id="uploadArea">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                    <h3>Drag & Drop Files Here</h3>
+                    <p>or click to browse files</p>
+                    <input type="file" id="fileInput" class="file-input" multiple accept="image/*,video/*">
+                </div>
+                <div id="fileList"></div>
+                <button class="btn btn-block" id="uploadBtn">Upload Files</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Plastic Management Modal -->
+    <div id="plasticManagementModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Plastic Management</h2>
+                <button class="close-btn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="plasticForm" class="plastic-form">
+                    <div class="form-group">
+                        <label for="plasticSchoolName">School Name</label>
+                        <input type="text" id="plasticSchoolName" name="plasticSchoolName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="schoolAddress">School Address</label>
+                        <input type="text" id="schoolAddress" name="schoolAddress" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="plasticWaste">Amount of Plastic Waste (in tons)</label>
+                        <input type="number" id="plasticWaste" name="plasticWaste" step="0.01" min="0" required>
+                    </div>
+                    <button type="submit" class="btn btn-block">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Reports Modal -->
+    <div id="reportsModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Reports</h2>
+                <button class="close-btn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>Report generation feature coming soon. This section will show statistics and progress charts of your school's contribution to the Clean India Green India initiative.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Leaderboard Modal -->
+    <div id="leaderboardModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Leaderboard</h2>
+                <button class="close-btn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="leaderboard">
+                    <table class="leaderboard-table">
+                        <thead>
+                            <tr>
+                                <th>Rank</th>
+                                <th>School Name</th>
+                                <th>Points</th>
+                            </tr>
+                        </thead>
+                        <tbody id="leaderboardBody">
+                            <!-- Leaderboard data will be inserted here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification -->
+    <div id="notification" class="notification"></div>
+
+    <script>
+        // DOM Elements
+        const loginPage = document.getElementById('loginPage');
+        const dashboard = document.getElementById('dashboard');
+        const loginForm = document.getElementById('loginForm');
+        const logoutBtn = document.getElementById('logoutBtn');
+        
+        // Dashboard Cards
+        const dailyTasksCard = document.getElementById('dailyTasksCard');
+        const uploadMediaCard = document.getElementById('uploadMediaCard');
+        const plasticManagementCard = document.getElementById('plasticManagementCard');
+        const reportsCard = document.getElementById('reportsCard');
+        const leaderboardCard = document.getElementById('leaderboardCard');
+        
+        // Modals
+        const dailyTasksModal = document.getElementById('dailyTasksModal');
+        const uploadMediaModal = document.getElementById('uploadMediaModal');
+        const plasticManagementModal = document.getElementById('plasticManagementModal');
+        const reportsModal = document.getElementById('reportsModal');
+        const leaderboardModal = document.getElementById('leaderboardModal');
+        
+        // Modal close buttons
+        const closeBtns = document.querySelectorAll('.close-btn');
+        
+        // Upload Elements
+        const uploadArea = document.getElementById('uploadArea');
+        const fileInput = document.getElementById('fileInput');
+        const fileList = document.getElementById('fileList');
+        const uploadBtn = document.getElementById('uploadBtn');
+        
+        // Plastic Form
+        const plasticForm = document.getElementById('plasticForm');
+        
+        // Notification
+        const notification = document.getElementById('notification');
+        
+        // Points and Leaderboard
+        const userPointsElement = document.getElementById('userPoints');
+        const leaderboardBody = document.getElementById('leaderboardBody');
+        
+        // Initialize leaderboard data
+        let leaderboardData = [
+            { school: "Green Valley School", points: 450 },
+            { school: "Eco Academy", points: 380 },
+            { school: "Nature's Pride School", points: 320 },
+            { school: "Clean Earth High School", points: 290 },
+            { school: "Sustainable Future School", points: 250 }
+        ];
+        
+        // Current user points
+        let userPoints = 0;
+        
+        // Form validation
+        function validateLoginForm() {
+            let isValid = true;
+            
+            // School name validation
+            const schoolName = document.getElementById('schoolName').value.trim();
+            if (schoolName === '') {
+                document.getElementById('schoolNameError').style.display = 'block';
+                isValid = false;
+            } else {
+                document.getElementById('schoolNameError').style.display = 'none';
+            }
+            
+            // Email validation
+            const email = document.getElementById('email').value.trim();
+            const emailRegex = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
+            if (!emailRegex.test(email)) {
+                document.getElementById('emailError').style.display = 'block';
+                isValid = false;
+            } else {
+                document.getElementById('emailError').style.display = 'none';
+            }
+            
+            // Password validation
+            const password = document.getElementById('password').value;
+            if (password.length < 6) {
+                document.getElementById('passwordError').style.display = 'block';
+                isValid = false;
+            } else {
+                document.getElementById('passwordError').style.display = 'none';
+            }
+            
+            return isValid;
+        }
+        
+        // Show notification
+        function showNotification(message, type) {
+            notification.textContent = message;
+            notification.className = `notification ${type}`;
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+        
+        // Update user points display
+        function updateUserPoints() {
+            userPointsElement.textContent = `${userPoints} Points`;
+            userPointsElement.classList.add('pulse');
+            setTimeout(() => {
+                userPointsElement.classList.remove('pulse');
+            }, 500);
+        }
+        
+        // Update leaderboard
+        function updateLeaderboard() {
+            // Sort leaderboard by points (descending)
+            leaderboardData.sort((a, b) => b.points - a.points);
+            
+            // Clear existing leaderboard
+            leaderboardBody.innerHTML = '';
+            
+            // Add current user to leaderboard if they have points
+            const schoolName = localStorage.getItem('schoolName');
+            if (schoolName && userPoints > 0) {
+                // Check if user is already in leaderboard
+                const userIndex = leaderboardData.findIndex(entry => entry.school === schoolName);
+                
+                if (userIndex !== -1) {
+                    // Update existing entry
+                    leaderboardData[userIndex].points = userPoints;
+                } else {
+                    // Add new entry
+                    leaderboardData.push({ school: schoolName, points: userPoints });
+                    // Sort again after adding
+                    leaderboardData.sort((a, b) => b.points - a.points);
+                }
+            }
+            
+            // Populate leaderboard table
+            leaderboardData.forEach((entry, index) => {
+                const row = document.createElement('tr');
+                
+                // Rank column with special styling for top 3
+                const rankCell = document.createElement('td');
+                const rankSpan = document.createElement('span');
+                rankSpan.className = 'rank';
+                
+                if (index === 0) rankSpan.classList.add('first');
+                else if (index === 1) rankSpan.classList.add('second');
+                else if (index === 2) rankSpan.classList.add('third');
+                
+                rankSpan.textContent = `#${index + 1}`;
+                rankCell.appendChild(rankSpan);
+                
+                // School name column
+                const schoolCell = document.createElement('td');
+                schoolCell.textContent = entry.school;
+                
+                // Points column
+                const pointsCell = document.createElement('td');
+                const pointsBadge = document.createElement('span');
+                pointsBadge.className = 'points-badge';
+                pointsBadge.textContent = `${entry.points} pts`;
+                pointsCell.appendChild(pointsBadge);
+                
+                // Append cells to row
+                row.appendChild(rankCell);
+                row.appendChild(schoolCell);
+                row.appendChild(pointsCell);
+                
+                // Append row to table body
+                leaderboardBody.appendChild(row);
+            });
+        }
+        
+        // Login form submission
+        loginForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            if (validateLoginForm()) {
+                // Store login info in localStorage for demo purposes
+                const schoolName = document.getElementById('schoolName').value;
+                localStorage.setItem('schoolName', schoolName);
+                
+                // Initialize user points
+                userPoints = 0;
+                updateUserPoints();
+                
+                // Show dashboard
+                loginPage.style.display = 'none';
+                dashboard.style.display = 'block';
+                
+                showNotification('Login successful!', 'success');
+            }
+        });
+        
+        // Logout button
+        logoutBtn.addEventListener('click', function() {
+            dashboard.style.display = 'none';
+            loginPage.style.display = 'flex';
+            loginForm.reset();
+            
+            showNotification('Logged out successfully!', 'success');
+        });
+        
+        // Dashboard card click events
+        dailyTasksCard.addEventListener('click', function() {
+            dailyTasksModal.style.display = 'flex';
+        });
+        
+        uploadMediaCard.addEventListener('click', function() {
+            uploadMediaModal.style.display = 'flex';
+        });
+        
+        plasticManagementCard.addEventListener('click', function() {
+            plasticManagementModal.style.display = 'flex';
+            
+            // Pre-fill school name if available
+            const savedSchoolName = localStorage.getItem('schoolName');
+            if (savedSchoolName) {
+                document.getElementById('plasticSchoolName').value = savedSchoolName;
+            }
+        });
+        
+        reportsCard.addEventListener('click', function() {
+            reportsModal.style.display = 'flex';
+        });
+        
+        leaderboardCard.addEventListener('click', function() {
+            updateLeaderboard();
+            leaderboardModal.style.display = 'flex';
+        });
+        
+        // Close modal events
+        closeBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                this.closest('.modal').style.display = 'none';
+            });
+        });
+        
+        // Close modal when clicking outside
+        window.addEventListener('click', function(e) {
+            if (e.target.classList.contains('modal')) {
+                e.target.style.display = 'none';
+            }
+        });
+        
+        // File upload functionality
+        uploadArea.addEventListener('click', function() {
+            fileInput.click();
+        });
+        
+        uploadArea.addEventListener('dragover', function(e) {
+            e.preventDefault();
+            this.style.backgroundColor = '#c8e6c9';
+        });
+        
+        uploadArea.addEventListener('dragleave', function() {
+            this.style.backgroundColor = '';
+        });
+        
+        uploadArea.addEventListener('drop', function(e) {
+            e.preventDefault();
+            this.style.backgroundColor = '';
+            
+            const files = e.dataTransfer.files;
+            handleFiles(files);
+        });
+        
+        fileInput.addEventListener('change', function() {
+            handleFiles(this.files);
+        });
+        
+        function handleFiles(files) {
+            fileList.innerHTML = '';
+            
+            if (files.length === 0) {
+                return;
+            }
+            
+            const list = document.createElement('ul');
+            list.style.listStyleType = 'none';
+            
+            for (let i = 0; i < files.length; i++) {
+                const file = files[i];
+                const listItem = document.createElement('li');
+                listItem.style.marginBottom = '10px';
+                listItem.style.padding = '10px';
+                listItem.style.backgroundColor = '#f1f1f1';
+                listItem.style.borderRadius = '5px';
+                
+                const fileInfo = document.createElement('div');
+                fileInfo.style.display = 'flex';
+                fileInfo.style.alignItems = 'center';
+                
+                const icon = document.createElement('i');
+                icon.className = file.type.startsWith('image/') ? 'fas fa-image' : 'fas fa-video';
+                icon.style.marginRight = '10px';
+                icon.style.color = '#4caf50';
+                
+                const fileName = document.createElement('span');
+                fileName.textContent = file.name;
+                
+                const fileSize = document.createElement('span');
+                fileSize.textContent = ` (${(file.size / 1024 / 1024).toFixed(2)} MB)`;
+                fileSize.style.color = '#666';
+                fileSize.style.fontSize = '14px';
+                
+                fileInfo.appendChild(icon);
+                fileInfo.appendChild(fileName);
+                fileInfo.appendChild(fileSize);
+                listItem.appendChild(fileInfo);
+                list.appendChild(listItem);
+            }
+            
+            fileList.appendChild(list);
+        }
+        
+        uploadBtn.addEventListener('click', function() {
+            if (fileInput.files.length > 0) {
+                // Calculate points: 10 points per image, 15 points per video
+                let pointsEarned = 0;
+                const files = fileInput.files;
+                
+                for (let i = 0; i < files.length; i++) {
+                    if (files[i].type.startsWith('image/')) {
+                        pointsEarned += 10;
+                    } else if (files[i].type.startsWith('video/')) {
+                        pointsEarned += 15;
+                    }
+                }
+                
+                // Add points to user
+                userPoints += pointsEarned;
+                updateUserPoints();
+                
+                showNotification(`Files uploaded successfully! You earned ${pointsEarned} points.`, 'points');
+                uploadMediaModal.style.display = 'none';
+                fileList.innerHTML = '';
+                fileInput.value = '';
+            } else {
+                showNotification('Please select files to upload', 'error');
+            }
+        });
+        
+        // Plastic form submission
+        plasticForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const schoolName = document.getElementById('plasticSchoolName').value;
+            const address = document.getElementById('schoolAddress').value;
+            const plasticWaste = document.getElementById('plasticWaste').value;
+            
+            if (schoolName && address && plasticWaste) {
+                // Award points for plastic waste reporting (5 points per ton)
+                const pointsEarned = Math.floor(parseFloat(plasticWaste) * 5);
+                userPoints += pointsEarned;
+                updateUserPoints();
+                
+                showNotification(`Plastic waste data submitted successfully! You earned ${pointsEarned} points.`, 'success');
+                plasticManagementModal.style.display = 'none';
+                plasticForm.reset();
+            }
+        });
+        
+        // Check if user is already logged in
+        window.addEventListener('load', function() {
+            const savedSchoolName = localStorage.getItem('schoolName');
+            if (savedSchoolName) {
+                loginPage.style.display = 'none';
+                dashboard.style.display = 'block';
+                
+                // Load user points from localStorage if available
+                const savedPoints = localStorage.getItem('userPoints');
+                if (savedPoints) {
+                    userPoints = parseInt(savedPoints);
+                    updateUserPoints();
+                }
+            }
+        });
+        
+        // Save user points to localStorage when it changes
+        window.addEventListener('beforeunload', function() {
+            localStorage.setItem('userPoints', userPoints.toString());
+        });
+    </script>
+</body>
+</html>
